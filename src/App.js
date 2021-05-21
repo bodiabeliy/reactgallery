@@ -1,23 +1,30 @@
-import logo from './logo.svg';
 import './App.css';
+import React from 'react';
+
+import PhotoList from './components/PhotoList'
+import Navbar from './components/Navbar'
+
+
 
 function App() {
+
+  //дефолтный массив картинок 
+  const gallery = [
+    {photo: './images/bag.jpg',  id:1, name: 'Night bag'},
+    {photo: './images/walk.jpg', id:2,name: 'Alley'},
+    {photo: './images/sunset.jpg', id:3, name: 'Sunset'},
+    {photo: './images/sunrise.jpg', id:4, name: 'Sunrise'},
+    {photo: './images/300x200.jpg', name: 'fon'},
+    {adding: '', name:''},
+  ]
+
+  // атрибут photos - входящие данные для детского компонента (формирование списка фото)
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Navbar />
+      <div className="photoGrid">
+      <PhotoList photos={gallery} />
+      </div>
     </div>
   );
 }
