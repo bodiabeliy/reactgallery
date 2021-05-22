@@ -101,6 +101,7 @@ export default function PersistentDrawerLeft(props) {
 
   // выбран елемент из списка
   const handleMenu = (event) => {
+    console.log(props);
     setAnchorEl(event.currentTarget);
   };
 
@@ -110,12 +111,18 @@ export default function PersistentDrawerLeft(props) {
 
   const handleDrawerOpen = () => {
     setOpen(true);
-    console.log(props);
   };
 
   const handleDrawerClose = () => {
     setOpen(false);
   };
+
+  function bytesToSize(bytes) {
+    const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB']
+    if (bytes === 0) return '0 Byte'
+    const i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)))
+    return Math.round(bytes / Math.pow(1024, i)) + ' ' + sizes[i]
+   }
 
   return (
     <div className={classes.root}>
@@ -218,7 +225,7 @@ export default function PersistentDrawerLeft(props) {
         </div>
         <Divider />
         <List>
-          {['Total size', 'User photos'].map((text, index) => (
+          {[`System storage: ${bytesToSize(21400000)}`, `User upload: ${bytesToSize(0)}`].map((text, index) => (
             <ListItem button key={text}>
               <ListItemIcon>{index % 2 === 0 ? <PhotoSizeSelectActualIcon /> : <PermIdentityIcon />}</ListItemIcon>
               <ListItemText primary={text} />
